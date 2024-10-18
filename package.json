@@ -1,0 +1,34 @@
+{
+    "name": "microservice_node_template",
+    "private": true,
+    "version": "1.0.1",
+    "dependencies": {
+        "@apidevtools/json-schema-ref-parser": "^9.1.2",
+        "app-root-path": "^3.1.0",
+        "axios": "^1.7.7",
+        "env-to-config": "^1.3.2",
+        "fastify": "^4.19.0",
+        "nodemailer": "^6.9.13",
+        "pm2": "^5.3.0"
+    },
+    "scripts": {
+        "log": "pm2 log",
+        "list": "pm2 list",
+        "start": "pm2 start pm2.config.js && npm run log",
+        "delete": "pm2 delete pm2.config.js",
+        "restart": "pm2 restart pm2.config.js && pm2 log",
+        "reload": "pm2 reload pm2.config.js && pm2 log",
+        "start:dev": "pm2 start pm2.dev.config.js && npm run log",
+        "delete:dev": "pm2 delete pm2.dev.config.js",
+        "restart:dev": "pm2 restart pm2.dev.config.js && pm2 log",
+        "reload:dev": "pm2 reload pm2.dev.config.js && pm2 log",
+        "test": "cucumber-js tests/ -r tests/features --format @cucumber/pretty-formatter --format html:output/report.html --format json:output/report.json",
+        "test:current": "cucumber-js tests/ -r tests/features --tags \"@current\" --format @cucumber/pretty-formatter --format html:output/report.html --format json:output/report.json"
+    },
+    "devDependencies": {
+        "@cucumber/cucumber": "^9.5.1",
+        "@cucumber/pretty-formatter": "^1.0.0",
+        "@fastify/swagger": "^8.12.1",
+        "@fastify/swagger-ui": "^2.0.1"
+    }
+}
