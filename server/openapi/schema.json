@@ -1,0 +1,170 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "User Management API",
+    "version": "1.0.0",
+    "description": "API per la gestione degli utenti"
+  },
+  "servers": [
+    {
+      "url": "http://localhost",
+      "description": "Local instance"
+    }
+  ],
+  "paths": {
+    "/user": {
+      "get": {
+        "summary": "Ottieni la lista di utenti",
+        "responses": {
+          "200": {
+            "description": "Lista di utenti",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/User" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/{id}": {
+      "get": {
+        "summary": "Ottieni un utente specifico",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" },
+            "description": "ID dell'utente"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Dettagli utente",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/User" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/create": {
+      "post": {
+        "summary": "Crea un nuovo utente",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user_name": { "type": "string" },
+                  "email": { "type": "string" }
+                },
+                "required": ["user_name", "email"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Utente creato",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/User" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/edit/{id}": {
+      "put": {
+        "summary": "Modifica un utente",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" },
+            "description": "ID dell'utente da modificare"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user_name": { "type": "string" },
+                  "email": { "type": "string" }
+                },
+                "required": ["user_name", "email"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Utente modificato",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/User" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/delete/{id}": {
+      "delete": {
+        "summary": "Elimina un utente",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" },
+            "description": "ID dell'utente da eliminare"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Utente eliminato",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "user_name": { "type": "string" },
+          "email": { "type": "string" },
+          "pippo": {"type": "string"}
+        },
+        "required": ["id", "user_name", "email", "pippo"]
+      }
+    }
+  }
+}
